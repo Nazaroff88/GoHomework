@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<title>Persons List TEST</title>
+<body>
+  <div style="text-align:center">
+  <h1 style="font-family:arial;text-align:center;color:#5e5e5e;"> CREATE FORM </h1>
+  <hr>
+  <form action="/createprocess" name="form" method="POST" onsubmit="return ValidateEmail(document.form.tableEmail)">
+    <table>
+      <tr>
+        <th><label for="fnm">First Name</label></th>
+        <th><input type="text" maxlength="100" name="tableFirstName" id="fnm" placeholder="First Name" style="width:200px" required></input></th>
+      </tr>
+      <tr>
+        <th><label for="lnm">Last Name</label></th>
+        <th><input type="text" maxlength="100" name="tableLastName" id="lnm" placeholder="Last Name" style="width:200px" required></input></th>
+      </tr>
+      <tr>
+        <th><label for="bd">Birth Date</label></th>
+        <th><input type="date" name="tableBDate" id="bd" style="width:200px" required></input></th>
+      </tr>
+      <tr>
+        <th><label for="gnd">Gender</label></th>
+        <th>
+          <select id="gnd" name="tableGender" style="width:200px" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </th>
+      </tr>
+      <tr>
+        <th><label for="mail">E-mail</label></th>
+        <th><input type="text" name="tableEmail" id="mail" placeholder="E-mail" style="width:200px" required></input></th>
+      </tr>
+      <tr>
+        <th><label for="adr">Address</label></th>
+        <th><input type="text" name="tableAddress" id="adr" placeholder="Address" style="width:200px"></input></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><input type="submit" value="Create"></input></th>
+      </tr>
+    </table>
+  </form>
+  </div>
+  <hr>
+  <form action="/" method="POST"><input type="submit" value="<< Main Page"></form>
+  <script src="email-validation.js"></script>
+</body>
+</html>

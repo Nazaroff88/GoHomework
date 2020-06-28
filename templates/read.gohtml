@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<title>Persons List TEST</title>
+<body>
+
+<h1  style="font-family:arial;text-align:center;color:#5e5e5e;"> READ FORM </h1>
+<hr>
+<table>
+  <form action="/read" method="POST">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td><input type="text" name="FirstName"></td>
+      <td><input type="text" name="LastName"></td>
+      <td><input type="submit" value="Search"></td>
+    </tr>
+  </form>
+</table>
+<hr>
+<table class="display" id="MyTable">
+  <thead>
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Gender</th>
+        <th>E-mail</th>
+        <th>Address</th>
+        <th></th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    <tr>
+      <td>{{ .Id }}</td>
+      <td>{{ .FirstName }}</td>
+      <td>{{ .LastName }}</td>
+      <td>{{ .Bdate }}</td>
+      <td>{{ .Gender}}</td>
+      <td>{{ .Email }}</td>
+      <td>{{ .Address }}</td>
+      <td><a href="/update?id={{ .Id }}&firstName={{ .FirstName }}&lastName={{ .LastName}}&bdate={{ .Bdate}}&email={{ .Email }}&address={{ .Address}}" style="font-family:arial;color:#5e5e5e;">UPDATE</a></td>
+      <td><a href="/deleteprocess?id={{ .Id }}" style="font-family:arial;color:#5e5e5e;">DELETE</a></td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+<hr>
+<form action="/" method="POST"><input type="submit" value="<< Main Page"></form>
+<script src="sort-table.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#MyTable').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                //to select and search from grid
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+</script>
+<style type="text/css">
+  table { border: 1px solid black; border-collapse: collapse; }
+  th, td { padding: 2px 5px; border: 1px solid black; }
+  thead { background: #ddd; }
+</style>
+</body>
+</html>

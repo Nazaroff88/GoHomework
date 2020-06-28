@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<title>Persons List TEST</title>
+<body>
+<h1  style="font-family:arial;text-align:center;color:#5e5e5e;"> UPDATE FORM </h1>
+<hr>
+  <form action="/updateprocess" name="form" method="POST" onsubmit="return ValidateEmail(document.form.tableEmail)">
+    <label for="fid">First Name</label>
+    <input type="text" name="tableId" maxlength="100" id="fid" style="width:200px" value="{{ .Id }}" readonly></input>
+    <br>
+    <label for="fnm">First Name</label>
+    <input type="text" name="tableFirstName" maxlength="100" id="fnm" style="width:200px" value="{{ .FirstName }}" required></input>
+    <br>
+    <label for="lnm">Last Name</label>
+    <input type="text" name="tableLastName" id="lnm" style="width:200px" value="{{ .LastName }}" required></input>
+    <br>
+    <label for="bd">Birth Date</label>
+    <input type="date" name="tableBDate" id="bd" style="width:200px" value="" required></input>
+    <br>
+    <label for="gnd">Gender</label>
+      <select id="gnd" name="tableGender" style="width:200px" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    <br>
+    <label for="mail">E-mail</label>
+    <input type="text" name="tableEmail" id="mail" style="width:200px" value="{{ .Email }}" required></input>
+    <br>
+    <label for="adr">Address</label>
+    <input type="text" name="tableAddress" id="adr" style="width:200px" value="{{ .Address }}"></input>
+    <br>
+    <br>
+    <input type="submit" value="Update"></input>
+    </form>
+<hr>
+    <form action="/read" method="POST">
+      <input type="submit" value="<< Back">
+      <input formaction="/" type="submit" value="Main Page">
+    </form>
+    <script src="email-validation.js"></script>
+</body>
+</html>
